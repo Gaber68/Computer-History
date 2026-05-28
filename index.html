@@ -16,6 +16,7 @@
             --preliv: linear-gradient(135deg, #8d5d34, #c68942);
             --senca-xl: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
             --gumb-besedilo: #ffffff;
+            --outline-stikala: #ffffff;
         }
 
         body.svetli-nacin {
@@ -29,6 +30,7 @@
             --preliv: linear-gradient(135deg, #c68942, #e2a86b);
             --senca-xl: 0 40px 100px -20px rgba(93, 74, 62, 0.15);
             --gumb-besedilo: #ffffff;
+            --outline-stikala: #e6d5c3;
         }
 
         * {
@@ -74,7 +76,9 @@
             background: var(--glavna);
             color: var(--gumb-besedilo);
             border: none;
-            padding: 10px 25px;
+            padding: 0;
+            width: 80px;
+            height: 40px;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
@@ -102,6 +106,7 @@
             border-radius: 25px;
             cursor: pointer;
             border: 3px solid var(--temno-stikalo);
+            outline: solid var(--outline-stikala);
         }
 
         .kljukica {
@@ -159,7 +164,7 @@
         .mrezna-podlaga {
             position: fixed;
             inset: 0;
-            background-image: linear-gradient(rgba(198, 137, 66, 0.05) 1px, transparent 1px), 
+            background-image: linear-gradient(rgba(198, 137, 66, 0.05) 1px, transparent 1px),
                               linear-gradient(90deg, rgba(198, 137, 66, 0.05) 1px, transparent 1px);
             background-size: 60px 60px;
             z-index: -2;
@@ -211,48 +216,15 @@
             box-shadow: 0 25px 50px rgba(0,0,0,0.1);
         }
 
-        .k1 {
-            width: 360px;
-            top: -100px;
-            left: -500px;
-        }
-
-        .k2 {
-            width: 200px;
-            top: -40px;
-            left: 20%;
-            filter: blur(3px);
-            opacity: 0.4;
-        }
-
-        .k3 {
-            width: 280px;
-            top: 10px;
-            right: -300px;
-        }
-
-        .k4 {
-            width: 320px;
-            bottom: -70px;
-            left: -120px;
-            animation-delay: 2s;
-            background: blue;
-        }
-
-        .k5 {
-            width: 440px;
-            bottom: -150px;
-            right: -200px;
-            animation-delay: 3s;
-        }
+        .k1 { width: 360px; top: -100px; left: -500px; }
+        .k2 { width: 200px; top: -40px; left: 20%; filter: blur(3px); opacity: 0.4; }
+        .k3 { width: 280px; top: 10px; right: -300px; }
+        .k4 { width: 320px; bottom: -70px; left: -120px; animation-delay: 2s; }
+        .k5 { width: 440px; bottom: -150px; right: -200px; animation-delay: 3s; }
 
         @keyframes lebdi {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-40px) rotate(5deg);
-            }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-40px) rotate(5deg); }
         }
 
         .kartica-junaka {
@@ -340,6 +312,30 @@
             border: 2px solid var(--glavna);
             overflow: hidden;
             background-color: white;
+            flex-shrink: 0;
+        }
+
+        .gumb-vec {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 28px;
+            padding: 12px 28px;
+            background: transparent;
+            color: var(--glavna);
+            border: 1.5px solid var(--glavna);
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, transform 0.2s;
+            cursor: pointer;
+        }
+
+        .gumb-vec:hover {
+            background: var(--glavna);
+            color: #ffffff;
+            transform: translateY(-2px);
         }
 
         footer {
@@ -361,9 +357,7 @@
         }
 
         @media (max-width: 900px) {
-            .lebdeca-slika {
-                display: none;
-            }
+            .lebdeca-slika { display: none; }
         }
     </style>
 </head>
@@ -377,7 +371,6 @@
             <div class="skatla-logotipa"></div>
             <span>Computer History</span>
         </a>
-
         <div class="kontrole-glave">
             <button class="gumb-domov">Domov</button>
             <div class="stikalo">
@@ -409,7 +402,7 @@
                         <h4 id="stevilo-gen" style="color: var(--glavna); font-size: 0.9rem; font-weight: 800;">1 / 5</h4>
                         <h2 id="naziv-gen" style="font-size: 1.8rem; margin: 5px 0;">Vakuumske cevi</h2>
                         <p id="meta-gen" style="color: var(--utisana); font-weight: 500;">1940–1956</p>
-                        
+
                         <div style="position: relative; height: 40px; display: flex; align-items: center; margin-top: 25px;">
                             <div class="tir-drsnika">
                                 <div class="polnilo-drsnika" id="polnilo-drsnika"></div>
@@ -422,6 +415,11 @@
                     </div>
                 </div>
             </div>
+
+            <a id="gumb-vec" href="Generacije/gen1.html" class="gumb-vec">
+                Izvedi več o <span id="ime-v-gumbu">vakuumskih ceveh</span> &#8594;
+            </a>
+
         </div>
     </main>
 
@@ -437,30 +435,34 @@
         });
 
         const generacije = [
-            { naziv: "Vakuumske cevi", meta: "1940–1956", slika: "Slike/Slike2/slika1.png" },
-            { naziv: "Tranzistorji", meta: "1956–1963", slika: "Slike/Slike2/slika2.png" },
-            { naziv: "Integrirana vezja", meta: "1964–1971", slika: "Slike/Slike2/slika3.png" },
-            { naziv: "Mikroprocesorji", meta: "1971–2010", slika: "Slike/Slike2/slika4.png" },
-            { naziv: "Umetna inteligenca", meta: "2010–danes", slika: "Slike/Slike2/slika5.png" }
+            { naziv: "Vakuumske cevi",     opis: "vakuumskih ceveh",    meta: "1940–1956",  slika: "Slike/Slike2/slika1.png", stran: "Generacije/gen1.html" },
+            { naziv: "Tranzistorji",       opis: "tranzistorjih",       meta: "1956–1963",  slika: "Slike/Slike2/slika2.png", stran: "Generacije/gen2.html" },
+            { naziv: "Integrirana vezja",  opis: "integriranih vezjih", meta: "1964–1971",  slika: "Slike/Slike2/slika3.png", stran: "Generacije/gen3.html" },
+            { naziv: "Mikroprocesorji",    opis: "mikroprocesorjih",    meta: "1971–2010",  slika: "Slike/Slike2/slika4.png", stran: "Generacije/gen4.html" },
+            { naziv: "Umetna inteligenca", opis: "umetni inteligenci",  meta: "2010–danes", slika: "Slike/Slike2/slika5.png", stran: "Generacije/gen5.html" }
         ];
 
-        const drsnik = document.getElementById('glavni-drsnik');
-        const polnilo = document.getElementById('polnilo-drsnika');
+        const drsnik      = document.getElementById('glavni-drsnik');
+        const polnilo     = document.getElementById('polnilo-drsnika');
         const stevilkaGen = document.getElementById('stevilo-gen');
-        const nazivGen = document.getElementById('naziv-gen');
-        const metaGen = document.getElementById('meta-gen');
-        const slikaGen = document.getElementById('slika-gen');
+        const nazivGen    = document.getElementById('naziv-gen');
+        const metaGen     = document.getElementById('meta-gen');
+        const slikaGen    = document.getElementById('slika-gen');
+        const gumbVec     = document.getElementById('gumb-vec');
+        const imeVGumbu   = document.getElementById('ime-v-gumbu');
 
         drsnik.addEventListener('input', (e) => {
             const idx = parseInt(e.target.value);
             slikaGen.style.opacity = "0";
             setTimeout(() => {
-                polnilo.style.width = (idx / 4 * 100) + "%";
-                stevilkaGen.innerText = (idx + 1) + " / 5";
-                nazivGen.innerText = generacije[idx].naziv;
-                metaGen.innerText = generacije[idx].meta;
-                slikaGen.src = generacije[idx].slika;
+                polnilo.style.width    = (idx / 4 * 100) + "%";
+                stevilkaGen.innerText  = (idx + 1) + " / 5";
+                nazivGen.innerText     = generacije[idx].naziv;
+                metaGen.innerText      = generacije[idx].meta;
+                slikaGen.src           = generacije[idx].slika;
                 slikaGen.style.opacity = "1";
+                gumbVec.href           = generacije[idx].stran;
+                imeVGumbu.innerText    = generacije[idx].opis;
             }, 150);
         });
     </script>
