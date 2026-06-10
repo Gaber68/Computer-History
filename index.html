@@ -3,468 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Spoznajte zgodovino računalništva, od vakuumskih cevi do umetne inteligence.">
+    <meta name="keywords" content="računalništvo, zgodovina, procesorji, umetna inteligenca">
+    <meta name="author" content="Gaber">
     <title>Računalniška Zgodovina | Gaber</title>
-    <style>
-        :root {
-            --ozadje: #120d0b;
-            --glava-ozadje: #1a1310;
-            --kartica-ozadje: #1e1612;
-            --barva-besedila: #e6d5c3;
-            --glavna: #c68942;
-            --utisana: #8d7b6d;
-            --rob-poudarek: rgba(198, 137, 66, 0.2);
-            --preliv: linear-gradient(135deg, #8d5d34, #c68942);
-            --senca-xl: 0 40px 100px -20px rgba(0, 0, 0, 0.6);
-            --gumb-besedilo: #ffffff;
-            --outline-stikala: #ffffff;
-        }
-
-        body.svetli-nacin {
-            --ozadje: #f2e8df;
-            --glava-ozadje: #e6d5c3;
-            --kartica-ozadje: #ffffff;
-            --barva-besedila: #5d4a3e;
-            --glavna: #c68942;
-            --utisana: #8d7b6d;
-            --rob-poudarek: rgba(93, 74, 62, 0.1);
-            --preliv: linear-gradient(135deg, #c68942, #e2a86b);
-            --senca-xl: 0 40px 100px -20px rgba(93, 74, 62, 0.15);
-            --gumb-besedilo: #ffffff;
-            --outline-stikala: #e6d5c3;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            outline: none;
-        }
-
-        body {
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--ozadje);
-            color: var(--barva-besedila);
-            transition: background-color 0.4s, color 0.4s;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            overflow-x: hidden;
-        }
-
-        header {
-            position: sticky;
-            top: 0;
-            height: 80px;
-            background: var(--glava-ozadje);
-            backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 8%;
-            z-index: 1000;
-            border-bottom: 1px solid var(--rob-poudarek);
-            transition: background 0.4s, border 0.4s;
-        }
-
-        .kontrole-glave {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .gumb-domov {
-            background: var(--glavna);
-            color: var(--gumb-besedilo);
-            border: none;
-            padding: 0;
-            width: 80px;
-            height: 40px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: transform 0.3s, background 0.4s, box-shadow 0.3s;
-        }
-
-        .gumb-domov:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
-        .stikalo {
-            position: relative;
-            width: 80px;
-            height: 40px;
-            --svetlo-stikalo: #d8dbe0;
-            --temno-stikalo: #1a1a1c;
-        }
-
-        .nalepka-stikala {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--temno-stikalo);
-            border-radius: 25px;
-            cursor: pointer;
-            border: 3px solid var(--temno-stikalo);
-            outline: solid var(--outline-stikala);
-        }
-
-        .kljukica {
-            position: absolute;
-            display: none;
-        }
-
-        .drsec {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            border-radius: 25px;
-            transition: 0.3s;
-        }
-
-        .kljukica:checked ~ .drsec {
-            background-color: var(--svetlo-stikalo);
-        }
-
-        .drsec::before {
-            content: "";
-            position: absolute;
-            top: 5px;
-            left: 7px;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            box-shadow: inset 9px -3px 0px 0px var(--svetlo-stikalo);
-            background-color: var(--temno-stikalo);
-            transition: 0.3s;
-        }
-
-        .kljukica:checked ~ .drsec::before {
-            transform: translateX(38px);
-            background-color: var(--temno-stikalo);
-            box-shadow: none;
-        }
-
-        .logotip {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            font-weight: 800;
-            color: var(--barva-besedila);
-        }
-
-        .skatla-logotipa {
-            width: 30px;
-            height: 30px;
-            background: var(--preliv);
-            border-radius: 8px;
-        }
-
-        .mrezna-podlaga {
-            position: fixed;
-            inset: 0;
-            background-image: linear-gradient(rgba(198, 137, 66, 0.05) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(198, 137, 66, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            z-index: -2;
-        }
-
-        #dvojiski-zaslon {
-            position: fixed;
-            inset: 0;
-            opacity: 0.1;
-            font-family: monospace;
-            color: var(--glavna);
-            z-index: -1;
-            pointer-events: none;
-            word-break: break-all;
-        }
-
-        .junak {
-            position: relative;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 100px 20px;
-        }
-
-        .vsebina-junaka {
-            position: relative;
-            width: 100%;
-            max-width: 1400px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .lebdeca-slika {
-            position: absolute;
-            border-radius: 50%;
-            border: 6px solid var(--kartica-ozadje);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            object-fit: cover;
-            aspect-ratio: 1/1;
-            z-index: -1;
-            animation: lebdi 12s ease-in-out infinite;
-            transition: border 0.4s;
-        }
-
-        body.svetli-nacin .lebdeca-slika {
-            border-color: #ffffff;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.1);
-        }
-
-        .k1 { width: 360px; top: -100px; left: -500px; }
-        .k2 { width: 200px; top: -40px; left: 20%; filter: blur(3px); opacity: 0.4; }
-        .k3 { width: 280px; top: 10px; right: -300px; }
-        .k4 { width: 320px; bottom: -70px; left: -120px; animation-delay: 2s; }
-        .k5 { width: 440px; bottom: -150px; right: -200px; animation-delay: 3s; }
-
-        @keyframes lebdi {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-40px) rotate(5deg); }
-        }
-
-        .kartica-junaka {
-            background-color: var(--kartica-ozadje);
-            border-radius: 40px;
-            padding: 80px 60px;
-            width: 100%;
-            max-width: 1000px;
-            text-align: center;
-            box-shadow: var(--senca-xl);
-            z-index: 10;
-            border: 1px solid var(--rob-poudarek);
-            transition: background 0.4s, border 0.4s;
-        }
-
-        .kartica-junaka h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 25px;
-        }
-
-        .kartica-junaka h1 span {
-            color: var(--glavna);
-            display: block;
-            margin-top: 10px;
-        }
-
-        .skatla-casovnice {
-            width: 100%;
-            max-width: 680px;
-            background: var(--kartica-ozadje);
-            border-radius: 28px;
-            padding: 40px;
-            box-shadow: var(--senca-xl);
-            z-index: 100;
-            margin-top: 60px;
-            border: 1px solid var(--rob-poudarek);
-            transition: background 0.4s;
-        }
-
-        .tir-drsnika {
-            width: 100%;
-            height: 8px;
-            background: rgba(0,0,0,0.3);
-            border-radius: 10px;
-            position: relative;
-        }
-
-        body.svetli-nacin .tir-drsnika {
-            background: #eee4da;
-        }
-
-        .polnilo-drsnika {
-            position: absolute;
-            height: 8px;
-            background: var(--preliv);
-            border-radius: 10px;
-            transition: 0.3s;
-            width: 0%;
-        }
-
-        #glavni-drsnik {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-            cursor: pointer;
-            position: absolute;
-            z-index: 10;
-        }
-
-        #glavni-drsnik::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 32px;
-            height: 32px;
-            background: var(--glavna);
-            border: 5px solid #fff;
-            border-radius: 50%;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-        }
-
-        .predogled-generacije {
-            width: 120px;
-            height: 120px;
-            border-radius: 15px;
-            border: 2px solid var(--glavna);
-            overflow: hidden;
-            background-color: white;
-            flex-shrink: 0;
-        }
-
-        .gumb-vec {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            margin-top: 28px;
-            padding: 12px 28px;
-            background: transparent;
-            color: var(--glavna);
-            border: 1.5px solid var(--glavna);
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: background 0.2s, color 0.2s, transform 0.2s;
-            cursor: pointer;
-        }
-
-        .gumb-vec:hover {
-            background: var(--glavna);
-            color: #ffffff;
-            transform: translateY(-2px);
-        }
-
-        footer {
-            padding: 40px 8%;
-            background: var(--glava-ozadje);
-            border-top: 1px solid var(--rob-poudarek);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: background 0.4s;
-        }
-
-        .ime-v-nogi {
-            font-family: monospace;
-            background: rgba(198, 137, 66, 0.1);
-            padding: 6px 14px;
-            border-radius: 8px;
-            color: var(--glavna);
-        }
-
-        @media (max-width: 900px) {
-            .lebdeca-slika { display: none; }
-        }
-    </style>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
     <div class="mrezna-podlaga"></div>
-    <div id="dvojiski-zaslon"></div>
 
     <header>
-        <a href="#" class="logotip">
-            <div class="skatla-logotipa"></div>
-            <span>Computer History</span>
-        </a>
-        <div class="kontrole-glave">
-            <button class="gumb-domov">Domov</button>
-            <div class="stikalo">
-                <label class="nalepka-stikala">
-                    <input type="checkbox" class="kljukica" id="preklop-nacina">
-                    <span class="drsec"></span>
-                </label>
-            </div>
+        <div class="glava-levo">
+            <a href="index.html" class="logotip">
+                <div class="skatla-logotipa"></div>
+                <span>Computer History</span>
+            </a>
         </div>
+
+        <nav class="meni-ikone-center">
+            <a href="Generacije/gen1.html" class="ikona-povezava" title="Generacije">
+                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" fill="none" stroke-width="2">
+                    <path d="M12 2v4m0 12v4M8 6h8v10a4 4 0 0 1-8 0V6z"/><path d="M10 10h4M10 14h4"/>
+                </svg>
+            </a>
+            <a href="multimedija.html" class="ikona-povezava" title="Video">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+            </a>
+            <a href="kontakt.html" class="ikona-povezava" title="Kontakt">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <a href="tehnicni-podatki.html" class="ikona-povezava" title="Podatki">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            </a>
+        </nav>
     </header>
 
-    <main class="junak">
-        <div class="vsebina-junaka">
-            <img src="Slike/1st_gen.png" class="lebdeca-slika k1">
-            <img src="Slike/2nd_gen.png" class="lebdeca-slika k2">
-            <img src="Slike/3rd_gen.png" class="lebdeca-slika k3">
-            <img src="Slike/4th_gen.png" class="lebdeca-slika k4">
-            <img src="Slike/5th_gen.png" class="lebdeca-slika k5">
+    <main>
 
-            <div class="kartica-junaka">
-                <p style="font-weight: 700; color: var(--glavna); letter-spacing: 2px; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 15px;">1940 — 2026</p>
-                <h1>Računalniška <span>Zgodovina</span></h1>
-                <p>Uporabi gumba zgoraj za navigacijo in preklop med svetlim/temnim načinom.</p>
+        <div class="zacetna-kartica">
+            <h1 style="color: var(--glavna);">Računalniška Zgodovina</h1>
+            <p>Spoznajte fascinantno potovanje tehnologije od ogromnih vakuumskih cevi pa vse do sodobne umetne inteligence.</p>
+        </div>
+
+        <div style="margin-top: 60px;">
+            <a href="Generacije/gen1.html" class="gumb-raziskuj">Raziskuj zgodovino &#8594;</a>
+        </div>
+
+        <div class="stat-vrstica">
+            <div class="stat-element">
+                <span class="stat-stevilka">5</span>
+                <span class="stat-opis">generacij računalnikov</span>
             </div>
+            <div class="stat-locilo"></div>
+            <div class="stat-element">
+                <span class="stat-stevilka">80+</span>
+                <span class="stat-opis">let razvoja tehnologije</span>
+            </div>
+            <div class="stat-locilo"></div>
+            <div class="stat-element">
+                <span class="stat-stevilka">∞</span>
+                <span class="stat-opis">možnosti prihodnosti</span>
+            </div>
+        </div>
 
-            <div class="skatla-casovnice">
-                <div style="display: flex; gap: 25px; align-items: center;">
-                    <div style="flex: 1;">
-                        <h4 id="stevilo-gen" style="color: var(--glavna); font-size: 0.9rem; font-weight: 800;">1 / 5</h4>
-                        <h2 id="naziv-gen" style="font-size: 1.8rem; margin: 5px 0;">Vakuumske cevi</h2>
-                        <p id="meta-gen" style="color: var(--utisana); font-weight: 500;">1940–1956</p>
+        <section class="domov-kartice">
 
-                        <div style="position: relative; height: 40px; display: flex; align-items: center; margin-top: 25px;">
-                            <div class="tir-drsnika">
-                                <div class="polnilo-drsnika" id="polnilo-drsnika"></div>
-                            </div>
-                            <input type="range" id="glavni-drsnik" min="0" max="4" value="0" step="1" style="position: absolute; width: 100%;">
-                        </div>
-                    </div>
-                    <div class="predogled-generacije">
-                        <img id="slika-gen" src="Slike/Slike2/slika1.png" style="width: 100%; height: 100%; object-fit: cover; transition: opacity 0.3s;">
-                    </div>
+            <a href="Generacije/gen1.html" class="domov-kartica">
+                <div class="domov-kartica-ikona">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M17 8C8 10 5.9 16.17 3.82 19.21L5.71 21l1-1.29C7.38 19.33 8 19.66 8 20h13V8h-4zM9 18c0-.34.13-.65.34-.88L12 14l2.5 2.5L16 15l-4-4-3.5 3.5C8.19 14.81 8 15.38 8 16v2H6.31C8.22 13.5 11.5 9.5 17 8.5V18H9z"/></svg>
                 </div>
-            </div>
-
-            <a id="gumb-vec" href="Generacije/gen1.html" class="gumb-vec">
-                Izvedi več o <span id="ime-v-gumbu">vakuumskih ceveh</span> &#8594;
+                <h3>5 generacij</h3>
+                <p>Od vakuumskih cevi do umetne inteligence — prebrskajte vsako obdobje posebej z opisi, slikami in dejstvi.</p>
+                <span class="domov-kartica-povezava">Oglej si &#8594;</span>
             </a>
 
-        </div>
+            <a href="multimedija.html" class="domov-kartica">
+                <div class="domov-kartica-ikona">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M21 3H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-9 8L8 14V8l4 3zm5 3l-4-3 4-3v6z"/></svg>
+                </div>
+                <h3>Multimedija</h3>
+                <p>Oglejte si dokumentarne posnetke in poslušajte zvočni arhiv iz dobe prvih računalnikov.</p>
+                <span class="domov-kartica-povezava">Oglej si &#8594;</span>
+            </a>
+
+            <a href="tehnicni-podatki.html" class="domov-kartica">
+                <div class="domov-kartica-ikona">
+                    <svg viewBox="0 0 24 24"><path fill="currentColor" d="M9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4zm2 2H5V5h14v14zm0-16H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2z"/></svg>
+                </div>
+                <h3>Tehnični podatki</h3>
+                <p>Primerjalna tabela vseh generacij — tehnologije, programski jeziki, hitrosti in ključni pojmi.</p>
+                <span class="domov-kartica-povezava">Oglej si &#8594;</span>
+            </a>
+
+        </section>
+
+        <section class="casovnica">
+            <h2 class="casovnica-naslov">Kratek pregled zgodovine</h2>
+            <div class="casovnica-lista">
+
+                <div class="casovnica-element">
+                    <div class="casovnica-pika"></div>
+                    <div class="casovnica-vsebina">
+                        <span class="casovnica-leto">1940–1956</span>
+                        <strong>Vakuumske cevi</strong>
+                        <p>ENIAC zasede celotno sobo in porabi 150 kW električne energije.</p>
+                    </div>
+                </div>
+
+                <div class="casovnica-element">
+                    <div class="casovnica-pika"></div>
+                    <div class="casovnica-vsebina">
+                        <span class="casovnica-leto">1956–1963</span>
+                        <strong>Tranzistorji</strong>
+                        <p>Računalniki postanejo manjši, hitrejši in zanesljivejši.</p>
+                    </div>
+                </div>
+
+                <div class="casovnica-element">
+                    <div class="casovnica-pika"></div>
+                    <div class="casovnica-vsebina">
+                        <span class="casovnica-leto">1963–1971</span>
+                        <strong>Integrirana vezja</strong>
+                        <p>Tisoče tranzistorjev na enem čipu — rojstvo modernega računalnika.</p>
+                    </div>
+                </div>
+
+                <div class="casovnica-element">
+                    <div class="casovnica-pika"></div>
+                    <div class="casovnica-vsebina">
+                        <span class="casovnica-leto">1971–danes</span>
+                        <strong>Mikroprocesorji</strong>
+                        <p>Osebni računalnik vstopi v vsak dom. Intel 4004 začne revolucijo.</p>
+                    </div>
+                </div>
+
+                <div class="casovnica-element">
+                    <div class="casovnica-pika casovnica-pika-aktivna"></div>
+                    <div class="casovnica-vsebina">
+                        <span class="casovnica-leto">2000–danes</span>
+                        <strong>Umetna inteligenca</strong>
+                        <p>Stroji se učijo, prepoznavajo govor in rešujejo kompleksne probleme.</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
 
     <footer>
-        <div style="color: var(--utisana);">© 2026 Computer History.</div>
-        <div class="ime-v-nogi">Gaber</div>
+        <div class="footer-datum">&copy; 2026 Computer History</div>
+        <div class="footer-ime">Gaber</div>
     </footer>
 
-    <script>
-        const preklop = document.getElementById('preklop-nacina');
-        preklop.addEventListener('change', () => {
-            document.body.classList.toggle('svetli-nacin', preklop.checked);
-        });
-
-        const generacije = [
-            { naziv: "Vakuumske cevi",     opis: "vakuumskih ceveh",    meta: "1940–1956",  slika: "Slike/Slike2/slika1.png", stran: "Generacije/gen1.html" },
-            { naziv: "Tranzistorji",       opis: "tranzistorjih",       meta: "1956–1963",  slika: "Slike/Slike2/slika2.png", stran: "Generacije/gen2.html" },
-            { naziv: "Integrirana vezja",  opis: "integriranih vezjih", meta: "1964–1971",  slika: "Slike/Slike2/slika3.png", stran: "Generacije/gen3.html" },
-            { naziv: "Mikroprocesorji",    opis: "mikroprocesorjih",    meta: "1971–2010",  slika: "Slike/Slike2/slika4.png", stran: "Generacije/gen4.html" },
-            { naziv: "Umetna inteligenca", opis: "umetni inteligenci",  meta: "2010–danes", slika: "Slike/Slike2/slika5.png", stran: "Generacije/gen5.html" }
-        ];
-
-        const drsnik      = document.getElementById('glavni-drsnik');
-        const polnilo     = document.getElementById('polnilo-drsnika');
-        const stevilkaGen = document.getElementById('stevilo-gen');
-        const nazivGen    = document.getElementById('naziv-gen');
-        const metaGen     = document.getElementById('meta-gen');
-        const slikaGen    = document.getElementById('slika-gen');
-        const gumbVec     = document.getElementById('gumb-vec');
-        const imeVGumbu   = document.getElementById('ime-v-gumbu');
-
-        drsnik.addEventListener('input', (e) => {
-            const idx = parseInt(e.target.value);
-            slikaGen.style.opacity = "0";
-            setTimeout(() => {
-                polnilo.style.width    = (idx / 4 * 100) + "%";
-                stevilkaGen.innerText  = (idx + 1) + " / 5";
-                nazivGen.innerText     = generacije[idx].naziv;
-                metaGen.innerText      = generacije[idx].meta;
-                slikaGen.src           = generacije[idx].slika;
-                slikaGen.style.opacity = "1";
-                gumbVec.href           = generacije[idx].stran;
-                imeVGumbu.innerText    = generacije[idx].opis;
-            }, 150);
-        });
-    </script>
 </body>
 </html>

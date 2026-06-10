@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kontaktirajte nas z vprašanji o zgodovini računalništva.">
+    <meta name="keywords" content="kontakt, sporočilo, računalništvo, vprašanje">
+    <meta name="author" content="Gaber">
+    <title>Kontakt | Computer History</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="mrezna-podlaga"></div>
+
+    <header>
+        <div class="glava-levo">
+            <a href="index.html" class="logotip">
+                <div class="skatla-logotipa"></div>
+                <span>Computer History</span>
+            </a>
+        </div>
+        <nav class="meni-ikone-center">
+            <a href="index.html" class="ikona-povezava" title="Domov">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            </a>
+            <a href="multimedija.html" class="ikona-povezava" title="Video">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+            </a>
+            <a href="kontakt.html" class="ikona-povezava" title="Kontakt">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+            </a>
+            <a href="tehnicni-podatki.html" class="ikona-povezava" title="Podatki">
+                <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+            </a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="naslovni-del">
+            <p class="nadnaslov">Pišite nam</p>
+            <h1 class="glavni-naslov">Kontakt</h1>
+        </section>
+
+        <form action="#" method="post" class="kontakt-obrazec">
+
+            <!-- Kratko besedilo -->
+            <div class="polje-skupina">
+                <label for="ime">Ime in priimek</label>
+                <input type="text" id="ime" name="ime" placeholder="npr. Ana Novak" required>
+            </div>
+
+            <!-- E-pošta -->
+            <div class="polje-skupina">
+                <label for="email">E-poštni naslov</label>
+                <input type="email" id="email" name="email" placeholder="npr. ana@email.com" required>
+            </div>
+
+            <!-- Telefon -->
+            <div class="polje-skupina">
+                <label for="tel">Telefonska številka</label>
+                <input type="tel" id="tel" name="tel" placeholder="npr. +386 41 123 456">
+            </div>
+
+            <!-- Datum -->
+            <div class="polje-skupina">
+                <label for="datum">Kdaj bi nas radi kontaktirali?</label>
+                <input type="date" id="datum" name="datum">
+            </div>
+
+            <!-- Izbor iz seznama -->
+            <div class="polje-skupina">
+                <label for="tema">Tema poizvedbe</label>
+                <select id="tema" name="tema">
+                    <option value="" disabled selected>Izberite temo …</option>
+                    <option value="gen1">1. generacija — vakuumske cevi</option>
+                    <option value="gen2">2. generacija — tranzistorji</option>
+                    <option value="gen3">3. generacija — integrirana vezja</option>
+                    <option value="gen4">4. generacija — mikroprocesorji</option>
+                    <option value="gen5">5. generacija — umetna inteligenca</option>
+                    <option value="drugo">Drugo</option>
+                </select>
+            </div>
+
+            <!-- Potrditvena polja (checkboxes) -->
+            <div class="polje-skupina">
+                <p class="polje-naslov">Zanima me:</p>
+                <div class="checkbox-skupina">
+                    <label class="checkbox-oznaka">
+                        <input type="checkbox" name="zanimanje" value="strojnaOprema"> Strojna oprema
+                    </label>
+                    <label class="checkbox-oznaka">
+                        <input type="checkbox" name="zanimanje" value="programskaOprema"> Programska oprema
+                    </label>
+                    <label class="checkbox-oznaka">
+                        <input type="checkbox" name="zanimanje" value="osebnosti"> Zgodovinske osebnosti
+                    </label>
+                    <label class="checkbox-oznaka">
+                        <input type="checkbox" name="zanimanje" value="ai"> Umetna inteligenca
+                    </label>
+                </div>
+            </div>
+
+            <!-- Radio gumbi -->
+            <div class="polje-skupina">
+                <p class="polje-naslov">Kako ste izvedeli za nas?</p>
+                <div class="radio-skupina">
+                    <label class="checkbox-oznaka">
+                        <input type="radio" name="vir" value="iskanje"> Spletno iskanje
+                    </label>
+                    <label class="checkbox-oznaka">
+                        <input type="radio" name="vir" value="priporocilo"> Priporočilo
+                    </label>
+                    <label class="checkbox-oznaka">
+                        <input type="radio" name="vir" value="solsko"> Šolska naloga
+                    </label>
+                </div>
+            </div>
+
+            <!-- Dolgo besedilo -->
+            <div class="polje-skupina">
+                <label for="sporocilo">Vaše sporočilo</label>
+                <textarea id="sporocilo" name="sporocilo" rows="6" placeholder="Napišite svoje vprašanje ali komentar …"></textarea>
+            </div>
+
+            <button type="submit" class="gumb-obrazec">Pošlji sporočilo &#8594;</button>
+
+        </form>
+    </main>
+
+    <footer>
+        <div class="footer-datum">&copy; 2026 Computer History</div>
+        <div class="footer-ime">Gaber</div>
+    </footer>
+</body>
+</html>

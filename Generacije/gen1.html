@@ -2,833 +2,110 @@
 <html lang="sl">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Zgodovina 1. generacije računalnikov - vakuumske cevi.">
+    <meta name="keywords" content="vakuumske cevi, ENIAC, zgodovina računalništva">
+    <meta name="author" content="Gaber">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>1. Generacija — Vakuumske cevi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --ozadje: #120d0b;
-            --glava-ozadje: #1a1310;
-            --kartica-ozadje: #1e1612;
-            --barva-besedila: #e6d5c3;
-            --glavna: #c68942;
-            --utisana: #8d7b6d;
-            --rob-poudarek: rgba(198, 137, 66, 0.2);
-            --preliv: linear-gradient(135deg, #8d5d34, #c68942);
-            --gumb-besedilo: #ffffff;
-        }
+    <title>1. Generacija: Vakuumske cevi</title>
 
-        body.svetli-nacin {
-            --ozadje: #f2e8df;
-            --glava-ozadje: #e6d5c3;
-            --kartica-ozadje: #ffffff;
-            --barva-besedila: #5d4a3e;
-            --glavna: #c68942;
-            --utisana: #8d7b6d;
-            --rob-poudarek: rgba(93, 74, 62, 0.1);
-            --gumb-besedilo: #ffffff;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        body {
-            font-family: 'Outfit', sans-serif;
-            background-color: var(--ozadje);
-            color: var(--barva-besedila);
-            transition: background-color 0.4s, color 0.4s;
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* HEADER */
-        header {
-            position: sticky;
-            top: 0;
-            height: 70px;
-            background: var(--glava-ozadje);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 6%;
-            z-index: 1000;
-            border-bottom: 1px solid var(--rob-poudarek);
-            transition: background 0.4s;
-        }
-
-        .nazaj-gumb {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--glavna);
-            text-decoration: none;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 500;
-            letter-spacing: 0.5px;
-            transition: gap 0.2s;
-        }
-        .nazaj-gumb:hover { gap: 14px; }
-
-        .stikalo-glava {
-            position: relative;
-            width: 70px;
-            height: 36px;
-            --svetlo: #d8dbe0;
-            --temno: #1a1a1c;
-        }
-        .nalepka-stikala {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-color: var(--temno);
-            border-radius: 25px;
-            cursor: pointer;
-            border: 3px solid var(--temno);
-        }
-        .kljukica { position: absolute; display: none; }
-        .drsec { position: absolute; width: 100%; height: 100%; border-radius: 25px; transition: 0.3s; }
-        .kljukica:checked ~ .drsec { background-color: var(--svetlo); }
-        .drsec::before {
-            content: "";
-            position: absolute;
-            top: 4px; left: 5px;
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            box-shadow: inset 8px -3px 0px 0px var(--svetlo);
-            background-color: var(--temno);
-            transition: 0.3s;
-        }
-        .kljukica:checked ~ .drsec::before {
-            transform: translateX(34px);
-            background-color: var(--temno);
-            box-shadow: none;
-        }
-
-        /* HERO */
-        .hero {
-            position: relative;
-            padding: 80px 6% 60px;
-            border-bottom: 1px solid var(--rob-poudarek);
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: "01";
-            position: absolute;
-            right: 4%;
-            top: 50%;
-            transform: translateY(-50%);
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(120px, 18vw, 220px);
-            font-weight: 700;
-            color: var(--glavna);
-            opacity: 0.06;
-            line-height: 1;
-            pointer-events: none;
-            user-select: none;
-        }
-
-        .gen-oznaka {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 3px;
-            color: var(--glavna);
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 500;
-        }
-        .gen-oznaka::before {
-            content: "";
-            width: 30px;
-            height: 1px;
-            background: var(--glavna);
-        }
-
-        .hero h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: clamp(3rem, 7vw, 5.5rem);
-            font-weight: 700;
-            line-height: 1.1;
-            max-width: 700px;
-            margin-bottom: 16px;
-        }
-
-        .hero h1 em {
-            font-style: italic;
-            color: var(--glavna);
-        }
-
-        .hero-meta {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-top: 28px;
-            flex-wrap: wrap;
-        }
-
-        .hero-leto {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.85rem;
-            font-weight: 400;
-            color: var(--utisana);
-            background: var(--kartica-ozadje);
-            border: 1px solid var(--rob-poudarek);
-            padding: 6px 16px;
-            border-radius: 50px;
-        }
-
-        .hero-opis {
-            font-size: 1.05rem;
-            line-height: 1.85;
-            color: var(--utisana);
-            max-width: 600px;
-            font-weight: 300;
-            margin-top: 24px;
-        }
-
-        /* GLAVNA SLIKA + OPIS */
-        .glavna-slika-sekcija {
-            padding: 60px 6%;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 48px;
-            align-items: center;
-            border-bottom: 1px solid var(--rob-poudarek);
-        }
-
-        @media (max-width: 768px) {
-            .glavna-slika-sekcija { grid-template-columns: 1fr; }
-        }
-
-        .slika-okvir {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--rob-poudarek);
-            background: var(--kartica-ozadje);
-            aspect-ratio: 4/3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .slika-okvir img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .slika-placeholder {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            color: var(--utisana);
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .slika-placeholder svg {
-            width: 48px;
-            height: 48px;
-            opacity: 0.35;
-        }
-
-        .slika-napis {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 12px 16px;
-            background: linear-gradient(transparent, rgba(0,0,0,0.65));
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.75rem;
-            color: rgba(255,255,255,0.7);
-        }
-
-        .opis-besedilo h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 18px;
-            line-height: 1.2;
-        }
-
-        .opis-besedilo p {
-            font-size: 0.97rem;
-            line-height: 1.85;
-            color: var(--utisana);
-            font-weight: 300;
-            margin-bottom: 16px;
-        }
-
-        /* DEJSTVA */
-        .dejstva-sekcija {
-            padding: 60px 6%;
-            border-bottom: 1px solid var(--rob-poudarek);
-        }
-
-        .sekcija-naslov {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.72rem;
-            letter-spacing: 3px;
-            color: var(--glavna);
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 36px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .sekcija-naslov::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--rob-poudarek);
-        }
-
-        .dejstva-mreza {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-        }
-
-        .dejstvo-kartica {
-            background: var(--kartica-ozadje);
-            border: 1px solid var(--rob-poudarek);
-            border-radius: 16px;
-            padding: 28px 24px;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-
-        .dejstvo-kartica:hover {
-            border-color: var(--glavna);
-            transform: translateY(-4px);
-        }
-
-        .dejstvo-vrednost {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.4rem;
-            font-weight: 700;
-            color: var(--glavna);
-            line-height: 1;
-            margin-bottom: 8px;
-        }
-
-        .dejstvo-opis {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.83rem;
-            color: var(--utisana);
-            font-weight: 300;
-            line-height: 1.5;
-        }
-
-        /* GALERIJA */
-        .galerija-sekcija {
-            padding: 60px 6%;
-            border-bottom: 1px solid var(--rob-poudarek);
-        }
-
-        .galerija-mreza {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            grid-template-rows: 220px 220px;
-            gap: 16px;
-        }
-
-        @media (max-width: 768px) {
-            .galerija-mreza {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: auto;
-            }
-        }
-
-        .galerija-slika {
-            border-radius: 14px;
-            overflow: hidden;
-            border: 1px solid var(--rob-poudarek);
-            background: var(--kartica-ozadje);
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .galerija-slika:first-child {
-            grid-row: 1 / 3;
-        }
-
-        .galerija-slika img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .galerija-oznaka {
-            position: absolute;
-            top: 12px;
-            left: 12px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.7rem;
-            font-weight: 400;
-            color: rgba(255,255,255,0.7);
-            background: rgba(0,0,0,0.5);
-            padding: 4px 10px;
-            border-radius: 50px;
-        }
-
-        /* ZANIMIVOSTI */
-        .zanimivosti-sekcija {
-            padding: 60px 6%;
-            border-bottom: 1px solid var(--rob-poudarek);
-        }
-
-        .zanimivost-item {
-            display: grid;
-            grid-template-columns: 60px 1fr;
-            gap: 24px;
-            padding: 28px 0;
-            border-bottom: 1px solid var(--rob-poudarek);
-            align-items: start;
-        }
-
-        .zanimivost-item:last-child { border-bottom: none; }
-
-        .zanimivost-stevilka {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.6rem;
-            font-weight: 700;
-            color: var(--glavna);
-            opacity: 0.3;
-            line-height: 1;
-            text-align: right;
-        }
-
-        .zanimivost-vsebina h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 10px;
-        }
-
-        .zanimivost-vsebina p {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.93rem;
-            line-height: 1.8;
-            color: var(--utisana);
-            font-weight: 300;
-        }
-
-        /* ČASOVNICA */
-        .casovnica-sekcija {
-            padding: 60px 6%;
-            border-bottom: 1px solid var(--rob-poudarek);
-        }
-
-        .casovnica-item {
-            display: grid;
-            grid-template-columns: 100px 1fr;
-            position: relative;
-            padding-bottom: 36px;
-        }
-
-        .casovnica-item:last-child { padding-bottom: 0; }
-
-        .casovnica-item::before {
-            content: "";
-            position: absolute;
-            left: 80px;
-            top: 28px;
-            bottom: 0;
-            width: 1px;
-            background: var(--rob-poudarek);
-        }
-
-        .casovnica-item:last-child::before { display: none; }
-
-        .casovnica-leto {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            color: var(--glavna);
-            font-weight: 500;
-            padding-top: 4px;
-        }
-
-        .casovnica-dot {
-            position: absolute;
-            left: 76px;
-            top: 6px;
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            background: var(--glavna);
-            border: 2px solid var(--ozadje);
-        }
-
-        .casovnica-vsebina {
-            padding-left: 28px;
-        }
-
-        .casovnica-vsebina h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 1.1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-        }
-
-        .casovnica-vsebina p {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.88rem;
-            color: var(--utisana);
-            line-height: 1.7;
-            font-weight: 300;
-        }
-
-        /* NASLEDNJA GENERACIJA */
-        .naslednja-sekcija {
-            padding: 60px 6%;
-        }
-
-        .naslednja-kartica {
-            background: var(--kartica-ozadje);
-            border: 1px solid var(--rob-poudarek);
-            border-radius: 24px;
-            padding: 40px 48px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 24px;
-            text-decoration: none;
-            color: var(--barva-besedila);
-            transition: border-color 0.3s;
-        }
-
-        .naslednja-kartica:hover { border-color: var(--glavna); }
-
-        .naslednja-kartica h3 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.72rem;
-            letter-spacing: 2px;
-            color: var(--utisana);
-            text-transform: uppercase;
-            font-weight: 500;
-            margin-bottom: 8px;
-        }
-
-        .naslednja-kartica h2 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
-        }
-
-        .naslednja-gumb {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--glavna);
-            color: #fff;
-            padding: 14px 28px;
-            border-radius: 50px;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.9rem;
-            font-weight: 500;
-            white-space: nowrap;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .naslednja-gumb:hover { transform: translateX(4px); opacity: 0.9; }
-
-        footer {
-            padding: 32px 6%;
-            background: var(--glava-ozadje);
-            border-top: 1px solid var(--rob-poudarek);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-family: 'Outfit', sans-serif;
-            font-size: 0.8rem;
-            color: var(--utisana);
-        }
-
-        .gen-badge {
-            background: rgba(198, 137, 66, 0.1);
-            color: var(--glavna);
-            padding: 5px 14px;
-            border-radius: 8px;
-            font-weight: 500;
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-
-        .hero h1 { animation: fadeUp 0.7s ease both; }
-        .hero-meta { animation: fadeUp 0.7s 0.15s ease both; }
-        .hero-opis { animation: fadeUp 0.7s 0.25s ease both; }
-    </style>
+    <!-- POMEMBNO: preveri pot -->
+    <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
 
-    <header>
-        <a href="../index.html" class="nazaj-gumb">&#8592; Nazaj na zgodovino</a>
-        <div class="stikalo-glava">
-            <label class="nalepka-stikala">
-                <input type="checkbox" class="kljukica" id="preklop-nacina">
-                <span class="drsec"></span>
-            </label>
-        </div>
-    </header>
+<div class="mrezna-podlaga"></div>
 
-    <section class="hero">
-        <div class="gen-oznaka">Generacija 1</div>
-        <h1>Vakuumske <em>cevi</em></h1>
-        <div class="hero-meta">
-            <span class="hero-leto">1940 — 1956</span>
-            <span class="hero-leto">1. generacija računalnikov</span>
+<header>
+    <a href="../index.html" class="logotip">
+        <div class="skatla-logotipa"></div>
+        <span>Computer History</span>
+    </a>
+
+    <nav class="meni-generacije">
+        <a class="povezava-gen" href="gen1.html">1. Gen</a>
+        <a class="povezava-gen" href="gen2.html">2. Gen</a>
+        <a class="povezava-gen" href="gen3.html">3. Gen</a>
+        <a class="povezava-gen" href="gen4.html">4. Gen</a>
+        <a class="povezava-gen" href="gen5.html">5. Gen</a>
+    </nav>
+
+
+    <nav class="meni-ikone">
+        <a href="../index.html" class="ikona-povezava" title="Domov">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+        </a>
+        <a href="../multimedija.html" class="ikona-povezava" title="Video">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg>
+        </a>
+        <a href="../kontakt.html" class="ikona-povezava" title="Kontakt">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        </a>
+        <a href="../tehnicni-podatki.html" class="ikona-povezava" title="Podatki">
+            <svg viewBox="0 0 24 24"><path fill="currentColor" d="M3 13h2v-2H3v2zm0 4h2-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/></svg>
+        </a>
+    </nav>
+</header>
+
+<main>
+
+    <section class="naslovni-del">
+        <p class="nadnaslov">Začetki računalništva</p>
+        <h1 class="glavni-naslov">Vakuumske cevi</h1>
+        <p class="leta-meta">1940 — 1956</p>
+    </section>
+
+    <section class="generacija-postavitev">
+
+        <div class="opisni-del">
+            <p>
+            <strong>Prva generacija računalnikov (1940–1956)</strong> je bila utemeljena na uporabi <strong>vakuumskih cevi</strong>. Ti ogromni elektronski elementi so bili srce strojev, ki so bili tako veliki, da so zasedli celotne prostore.
+            </p>
+
+        <div class="poudarki-polje">
+            <p><strong>Ključne značilnosti:</strong></p>
+            <ul>
+                <li>Ogromne dimenzije (cele sobe).</li>
+                <li>Visoka poraba električne energije.</li>
+                <li>Pogosto pregrevanje in okvare.</li>
+            </ul>
         </div>
-        <p class="hero-opis">
-            Prva generacija računalnikov je temeljila na vakuumskih ceveh kot osnovnih elektronskih komponentah.
-            Ti kolosalni stroji so zaznamovali začetek računalniške dobe in postavili temelje za vse kar je sledilo.
+
+        <p>
+            Najbolj ikoničen predstavnik tega obdobja je računalnik <strong>ENIAC</strong>. Kljub pionirskemu dosežku so bile te naprave izjemno nezanesljive in zahtevne za vzdrževanje.
         </p>
+        </div>
+
+        <div class="galerija-slik">
+
+            <div class="slika-okvir">
+                <img src="../slike/gen1/prvi_rac.jpg" alt="Vakuumske cevi">
+            </div>
+
+            <div class="slika-okvir">
+                <img src="../slike/gen1/prvi_rac_2.jpg" alt="ENIAC računalnik">
+            </div>
+
+        </div>
+
     </section>
 
-    <section class="glavna-slika-sekcija">
-        <div class="slika-okvir">
-            <img src="../Slike/1st_gen.png" alt="Vakuumske cevi" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-            <div class="slika-placeholder" style="display:none;">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                    <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                    <path d="M21 15l-5-5L5 21"/>
-                </svg>
-                <span>Dodaj sliko</span>
-                <span style="opacity:0.5; font-size:0.72rem;">../Slike/1st_gen.png</span>
-            </div>
-            <div class="slika-napis">ENIAC, 1945 — prvi splošnonamenski računalnik</div>
-        </div>
-
-        <div class="opis-besedilo">
-            <h2>Začetek računalniške ere</h2>
-            <p>Vakuumske cevi so bile elektronske komponente, ki so nadomeščale mehanske relejne stikalne naprave.
-            Vsaka cev je delovala kot stikalo ali ojačevalnik elektronskih signalov.</p>
-            <p>Računalniki prve generacije so bili ogromni — zavzeli so cele sobe. ENIAC, eden najpomembnejših,
-            je tehtal 27 ton in vseboval več kot 17.000 vakuumskih cevi.</p>
-            <p>Programiranje je potekalo z ročnim prestavitvijo stikal in priključitvijo kablov — ni bilo
-            operacijskih sistemov ali programskih jezikov v današnjem pomenu besede.</p>
-        </div>
-    </section>
-
-    <section class="dejstva-sekcija">
-        <div class="sekcija-naslov">Ključna dejstva</div>
-        <div class="dejstva-mreza">
-            <div class="dejstvo-kartica">
-                <div class="dejstvo-vrednost">17.468</div>
-                <div class="dejstvo-opis">vakuumskih cevi v računalniku ENIAC</div>
-            </div>
-            <div class="dejstvo-kartica">
-                <div class="dejstvo-vrednost">27t</div>
-                <div class="dejstvo-opis">teža računalnika ENIAC</div>
-            </div>
-            <div class="dejstvo-kartica">
-                <div class="dejstvo-vrednost">160m²</div>
-                <div class="dejstvo-opis">površina ki jo je zasedel ENIAC</div>
-            </div>
-            <div class="dejstvo-kartica">
-                <div class="dejstvo-vrednost">5.000</div>
-                <div class="dejstvo-opis">seštevanj na sekundo</div>
-            </div>
-            <div class="dejstvo-kartica">
-                <div class="dejstvo-vrednost">150kW</div>
-                <div class="dejstvo-opis">poraba električne energije</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="galerija-sekcija">
-        <div class="sekcija-naslov">Galerija</div>
-        <div class="galerija-mreza">
-            <div class="galerija-slika">
-                <img src="../Slike/Slike2/slika1.png" alt="ENIAC" onerror="this.style.display='none';">
-                <div class="slika-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="36" height="36">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span>Glavna slika</span>
-                </div>
-                <span class="galerija-oznaka">ENIAC, 1945</span>
-            </div>
-            <div class="galerija-slika">
-                <div class="slika-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="28" height="28">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span>Slika 2</span>
-                </div>
-                <span class="galerija-oznaka">Vakuumska cev</span>
-            </div>
-            <div class="galerija-slika">
-                <div class="slika-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="28" height="28">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span>Slika 3</span>
-                </div>
-                <span class="galerija-oznaka">UNIVAC I, 1951</span>
-            </div>
-            <div class="galerija-slika">
-                <div class="slika-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="28" height="28">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span>Slika 4</span>
-                </div>
-                <span class="galerija-oznaka">Programiranje</span>
-            </div>
-            <div class="galerija-slika">
-                <div class="slika-placeholder">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" width="28" height="28">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/>
-                        <path d="M21 15l-5-5L5 21"/>
-                    </svg>
-                    <span>Slika 5</span>
-                </div>
-                <span class="galerija-oznaka">Pomnilniški bobni</span>
-            </div>
-        </div>
-    </section>
-
-    <section class="zanimivosti-sekcija">
-        <div class="sekcija-naslov">Zanimivosti</div>
-
-        <div class="zanimivost-item">
-            <div class="zanimivost-stevilka">01</div>
-            <div class="zanimivost-vsebina">
-                <h3>Prva napaka — izvor besede "bug"</h3>
-                <p>Leta 1947 je programerka Grace Hopper v računalniku Mark II našla dejanskega molj (bug),
-                ki je povzročal napake. Od takrat se izraz "bug" uporablja za programske napake.</p>
-            </div>
-        </div>
-
-        <div class="zanimivost-item">
-            <div class="zanimivost-stevilka">02</div>
-            <div class="zanimivost-vsebina">
-                <h3>ENIAC je bil strogo vojska skrivnost</h3>
-                <p>ENIAC je bil razvit med drugo svetovno vojno za izračun balističnih tabel.
-                Njegova obstoj je bil skrivnost vse do leta 1946, ko so ga javno razkrili.</p>
-            </div>
-        </div>
-
-        <div class="zanimivost-item">
-            <div class="zanimivost-stevilka">03</div>
-            <div class="zanimivost-vsebina">
-                <h3>Cevi so se pogosto pokvarile</h3>
-                <p>Vakuumske cevi so bile zelo nezanesljive — v ENIAC-u se je vsako uro pokvarila
-                povprečno ena cev. Tehniki so morali biti stalno prisotni za zamenjavo.</p>
-            </div>
-        </div>
-
-        <div class="zanimivost-item">
-            <div class="zanimivost-stevilka">04</div>
-            <div class="zanimivost-vsebina">
-                <h3>Programiranje s kabli in stikali</h3>
-                <p>Za spremembo programa je bilo potrebno fizično prestaviti kable in nastaviti stikala.
-                Samo priprava novega programa je lahko trajala dneve ali tedne.</p>
-            </div>
-        </div>
-
-        <div class="zanimivost-item">
-            <div class="zanimivost-stevilka">05</div>
-            <div class="zanimivost-vsebina">
-                <h3>UNIVAC I je napovedal volilni izid</h3>
-                <p>Leta 1952 je računalnik UNIVAC I točno napovedal zmago Eisenhowerja na predsedniških
-                volitvah — ure pred uradnimi rezultati. Javnost je bila šokirana.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="casovnica-sekcija">
-        <div class="sekcija-naslov">Časovnica</div>
-
-        <div class="casovnica-item">
-            <div class="casovnica-leto">1943</div>
-            <div class="casovnica-dot"></div>
-            <div class="casovnica-vsebina">
-                <h3>Začetek razvoja ENIAC</h3>
-                <p>Univerza v Pennsylvaniji začne razvoj prvega elektronskega splošnonamenskega računalnika za vojsko ZDA.</p>
-            </div>
-        </div>
-
-        <div class="casovnica-item">
-            <div class="casovnica-leto">1945</div>
-            <div class="casovnica-dot"></div>
-            <div class="casovnica-vsebina">
-                <h3>ENIAC dokončan</h3>
-                <p>ENIAC je uradno dokončan, čeprav vojna že konča. Uporablja se za izračune vodikove bombe.</p>
-            </div>
-        </div>
-
-        <div class="casovnica-item">
-            <div class="casovnica-leto">1948</div>
-            <div class="casovnica-dot"></div>
-            <div class="casovnica-vsebina">
-                <h3>Manchester Baby</h3>
-                <p>Britanija razvije prvi računalnik s shranjenim programom — Small-Scale Experimental Machine (SSEM).</p>
-            </div>
-        </div>
-
-        <div class="casovnica-item">
-            <div class="casovnica-leto">1951</div>
-            <div class="casovnica-dot"></div>
-            <div class="casovnica-vsebina">
-                <h3>UNIVAC I — prvi komercialni računalnik</h3>
-                <p>Remington Rand proda prvi komercialni računalnik UNIVAC I ameriški vladi. Začne se komercialna računalniška era.</p>
-            </div>
-        </div>
-
-        <div class="casovnica-item">
-            <div class="casovnica-leto">1956</div>
-            <div class="casovnica-dot"></div>
-            <div class="casovnica-vsebina">
-                <h3>Konec ere vakuumskih cevi</h3>
-                <p>Tranzistorji postanejo dovolj zanesljivi in poceni za uporabo v računalnikih. Začne se druga generacija.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="naslednja-sekcija">
-        <div class="sekcija-naslov">Naslednja generacija</div>
-        <a href="gen2.html" class="naslednja-kartica">
-            <div>
-                <h3>Generacija 2 · 1956–1963</h3>
-                <h2>Tranzistorji</h2>
-            </div>
-            <span class="naslednja-gumb">Nadaljuj &#8594;</span>
+    <section class="navigacija-naprej">
+        <a class="gumb-naslednja" href="gen2.html">
+            Pojdi na 2. generacijo →
         </a>
     </section>
 
-    <footer>
-        <span>© 2026 Computer History</span>
-        <span class="gen-badge">Gen. 01 — Vakuumske cevi</span>
-        <span>Gaber</span>
-    </footer>
+</main>
 
-    <script>
-        const preklop = document.getElementById('preklop-nacina');
-        preklop.addEventListener('change', () => {
-            document.body.classList.toggle('svetli-nacin', preklop.checked);
-        });
-    </script>
+<footer>
+    <div class="footer-datum">
+        &copy; 2026 Computer History
+    </div>
+    <div class="footer-ime">
+        Gaber
+    </div>
+</footer>
 
 </body>
 </html>
